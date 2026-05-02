@@ -39,7 +39,9 @@ if(isset($_POST['signIn'])){
     session_start();
     $row=$result->fetch_assoc();
     $_SESSION['email']=$row['email'];
-    header("Location: homepage.php");
+    
+    // INI BAGIAN YANG DIUBAH MENGARAH KE DASHBOARD
+    header("Location: ../dashboard.php");
     exit();
    }
    else{

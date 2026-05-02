@@ -1,5 +1,5 @@
 /* ---------------------------------------------------
-   NusaRent - Stylesheet Utama
+   NusaRent - Stylesheet Utama (style.css)
    --------------------------------------------------- */
 
 body {
@@ -7,43 +7,27 @@ body {
     background-color: #f3f4f6;
 }
 
-/* --- Animasi Form (Login & Register) --- */
-.form-container {
-    transition: all 0.5s ease;
-}
-
-.hidden-form {
-    display: none;
-    opacity: 0;
-}
-
-.active-form {
-    display: block;
-    opacity: 1;
-    animation: fadeIn 0.5s ease forwards;
-}
-
-@keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(-10px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
-}
-
 /* --- Bagian Gambar Background Kiri --- */
 .bg-image {
-    /* Menggunakan link gambar baru yang kamu berikan */
-    background-image: url('https://wallpaperaccess.com/full/7878041.jpg');
+    /* Link gambar kota modern */
+    background-image: url('https://tse3.mm.bing.net/th/id/OIP._E1sfCmKFPoqH23SgGF1YAHaE8?rs=1&pid=ImgDetMain&o=7&rm=3');
     background-size: cover;
     background-position: center;
 }
 
 /* --- Efek Gelap/Gradient di Atas Gambar --- */
 .overlay {
-    /* Gradient overlay yang lebih elegan agar teks di atas gambar tetap terbaca */
+    /* Gradient overlay agar teks putih di atas gambar tetap terbaca jelas */
     background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.4) 100%);
+}
+
+/* --- Animasi Menghilang untuk Notifikasi Error/Sukses --- */
+.fade-out-anim {
+    animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); pointer-events: none; }
 }

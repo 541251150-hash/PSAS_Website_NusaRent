@@ -41,9 +41,7 @@
         <!-- Sisi Kanan: Form Login & Register Dinamis -->
         <div class="w-full md:w-1/2 flex items-center justify-center p-8 lg:p-14 relative overflow-hidden">
             
-            <!-- ============================================== -->
-            <!-- FORM LOGIN (SIGN IN)                           -->
-            <!-- ============================================== -->
+            
             <div id="signIn" class="w-full transition-all duration-500">
                 <div class="text-center mb-8">
                     <h2 class="text-3xl font-bold text-gray-800">Selamat Datang Kembali!</h2>
@@ -79,15 +77,12 @@
 
                 <p class="text-center text-sm text-gray-600 mt-8">
                     Belum bergabung dengan NusaRent? 
-                    <!-- Tombol ini memicu script.js milik YouTube -->
+                   
                     <button type="button" id="signUpButton" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors bg-transparent border-none cursor-pointer">Daftar sekarang</button>
                 </p>
             </div>
 
-            <!-- ============================================== -->
-            <!-- FORM REGISTER (SIGN UP)                        -->
-            <!-- ============================================== -->
-            <!-- Form ini disembunyikan secara default (display: none) mengikuti gaya YouTube -->
+           
             <div id="signup" class="w-full transition-all duration-500" style="display:none;">
                 <div class="text-center mb-6">
                     <h2 class="text-3xl font-bold text-gray-800">Buat Akun Baru</h2>
@@ -95,7 +90,7 @@
                 </div>
 
                 <form method="post" action="register.php">
-                    <!-- Grid untuk First Name dan Last Name -->
+                    
                     <div class="grid grid-cols-2 gap-4 mb-4">
                         <div>
                             <label class="block text-gray-700 text-xs font-semibold mb-1" for="fName">Nama Depan</label>
@@ -142,7 +137,7 @@
 
                 <p class="text-center text-sm text-gray-600 mt-6">
                     Sudah memiliki akun? 
-                    <!-- Tombol ini memicu script.js milik YouTube -->
+                   
                     <button type="button" id="signInButton" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors bg-transparent border-none cursor-pointer">Masuk di sini</button>
                 </p>
             </div>
@@ -150,7 +145,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT WAJIB dari tutorial YouTube untuk animasi form -->
+    
     <script src="script.js"></script>
 </body>
 </html>

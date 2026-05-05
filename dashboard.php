@@ -33,6 +33,7 @@ $nama_user = isset($_SESSION['nama_lengkap']) ? $_SESSION['nama_lengkap'] : "Pel
         body {
             font-family: 'Roboto', Arial, sans-serif;
             background-color: #ffffff;
+            scroll-behavior: smooth;
         }
 
         /* Warna Biru Khas Indoloka */
@@ -112,7 +113,6 @@ $nama_user = isset($_SESSION['nama_lengkap']) ? $_SESSION['nama_lengkap'] : "Pel
         .hero-slider {
             background-image: url('https://images.unsplash.com/photo-1549473889-14f410d83298?q=80&w=2000&auto=format&fit=crop'); /* Gambar Bandung HD */
             background-size: cover;
-            /* DIUBAH: Fokus ke tengah dan tinggi disesuaikan persis gambar */
             background-position: center; 
             height: 520px; 
             position: relative;
@@ -167,7 +167,7 @@ $nama_user = isset($_SESSION['nama_lengkap']) ? $_SESSION['nama_lengkap'] : "Pel
         .dot.active { background-color: white; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased" id="top">
 
     <!-- NAVBAR TOP -->
     <nav class="bg-indoloka-blue border-indoloka-yellow text-white w-full">
@@ -383,7 +383,7 @@ $nama_user = isset($_SESSION['nama_lengkap']) ? $_SESSION['nama_lengkap'] : "Pel
 
                 <!-- Card 5: Yogyakarta -->
                 <div class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-md transition">
-                    <img src="gambar/jogja.jpg" alt="Yogyakarta" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+                    <img src="gambar/jogja.PNG" alt="Yogyakarta" class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
                     <div class="absolute bottom-0 left-0 w-full bg-black/50 p-2 flex flex-col items-center justify-center">
                         <p class="text-white text-2xl font-normal tracking-wide">Yogyakarta</p>
                         <p class="text-gray-300 text-xs italic mt-1">Lebih dari 400 rental</p>
@@ -403,12 +403,89 @@ $nama_user = isset($_SESSION['nama_lengkap']) ? $_SESSION['nama_lengkap'] : "Pel
         </div>
     </section>
 
+    <!-- GARIS WARNA-WARNI (Sesuai Referensi Gambar) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
+        <div class="flex h-1.5 w-full mb-8">
+            <div class="w-1/3 bg-[#1ba0e2]"></div>
+            <div class="w-1/3 bg-[#ffb400]"></div>
+            <div class="w-1/3 bg-[#ff4b00]"></div>
+        </div>
+    </div>
+
+    <!-- MENGAPA SEWA MOBIL SECTION -->
+    <section class="pb-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-xl font-bold text-gray-900 mb-8 uppercase text-left">MENGAPA SEWA MOBIL DI NUSARENT.COM?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: Crazy Price -->
+                <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-lg transition duration-300">
+                    <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex items-center justify-center text-white mb-5 relative">
+                        <i class="fa-solid fa-car text-5xl"></i>
+                        <div class="absolute top-1 right-0 bg-[#1ba0e2] rounded-full w-10 h-10 flex flex-col items-center justify-center border-2 border-white shadow-sm">
+                            <span class="text-[8px] leading-tight font-bold">Rp</span>
+                            <span class="text-[6px] leading-tight font-bold text-yellow-300">BEST<br>PRICE</span>
+                        </div>
+                    </div>
+                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">Crazy Price</h3>
+                    <p class="text-gray-600 text-sm px-2">Harga sangat kompetitif dan murah,buktikan Yukkk...</p>
+                </div>
+
+                <!-- Card 2: Easy to Order -->
+                <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-lg transition duration-300">
+                    <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex items-center justify-center text-white mb-5">
+                        <i class="fa-regular fa-clock text-[55px]"></i>
+                    </div>
+                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">Easy to Order</h3>
+                    <p class="text-gray-600 text-sm px-2">Online order nya cepat, mudah & murah.</p>
+                </div>
+
+                <!-- Card 3: 10,000+ Cars -->
+                <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-lg transition duration-300">
+                    <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex items-center justify-center text-white mb-5">
+                        <div class="flex flex-col items-center justify-center mt-3">
+                            <i class="fa-solid fa-car text-2xl -mb-1"></i>
+                            <div class="flex gap-1">
+                                <i class="fa-solid fa-car text-3xl"></i>
+                                <i class="fa-solid fa-car text-3xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">10,000+ Cars in 90 Cities</h3>
+                    <p class="text-gray-600 text-[13px] leading-relaxed">NusaRent sewa mobil memiliki Lebih dari 10.000 mobil dengan berbagai tipe mobil. NusaRent rental mobil tersedia di 90 kota di Indonesia.</p>
+                </div>
+
+                <!-- Card 4: Layanan Premier -->
+                <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-lg transition duration-300">
+                    <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex flex-col items-center justify-center text-white mb-5 pt-2">
+                        <div class="flex gap-0.5 text-[10px] mb-1 text-white">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <i class="fa-solid fa-car text-3xl mb-1"></i>
+                        <i class="fa-solid fa-hand-holding text-2xl"></i>
+                    </div>
+                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">Layanan Premier:</h3>
+                    <div class="text-gray-600 text-sm text-left w-full pl-3">
+                        <p class="mb-1">• supir berpengalaman.</p>
+                        <p class="mb-1">• fleksibel jam & lokasi penjemputan.</p>
+                        <p>• fasilitas pemesanan minuman & tissue.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer Simple -->
-    <footer class="bg-gray-100 border-t border-gray-200 text-gray-600 py-6 mt-10">
+    <footer class="bg-gray-100 border-t border-gray-200 text-gray-600 py-8">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <p class="text-sm">© <?php echo date("Y"); ?> NusaRent (Sewa Mobil Online). All Rights Reserved.</p>
         </div>
     </footer>
+
+    <!-- TOMBOL SCROLL TO TOP -->
+    <a href="#top" class="fixed bottom-6 right-6 bg-[#444444] text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg hover:bg-gray-800 transition z-50">
+        <i class="fa-solid fa-chevron-up text-xl"></i>
+    </a>
 
     <!-- JAVASCRIPT UNTUK ANIMASI SLIDER -->
     <script>

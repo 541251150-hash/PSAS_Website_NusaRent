@@ -409,7 +409,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
             </div>
 
-            <!-- List Mobil 3: Innova Reborn -->
+           
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
                     <img src="gambar/toyota innova reborn.jpg" alt="Toyota Innova Reborn" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
@@ -435,7 +435,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
             </div>
 
-            <!-- List Mobil 4: Alphard -->
+            
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
                     <img src="gambar/toyota alphard.jpg" alt="Toyota Alphard" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
@@ -460,7 +460,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
             </div>
 
-            <!-- List Mobil 5: Hiace -->
+           
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
                     <img src="gambar/toyota hiace.jpg" alt="Toyota Hiace" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
@@ -485,7 +485,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
             </div>
 
-            <!-- List Mobil 6: Hiace Premio -->
+          
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
                     <img src="gambar/toyota hiace premio.jpg" alt="Toyota Hiace Premio" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">

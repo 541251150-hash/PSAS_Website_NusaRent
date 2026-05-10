@@ -19,10 +19,18 @@ $email = $_SESSION['email'];
 $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
 
 if($row = mysqli_fetch_assoc($query)){
-    if(isset($row['firstName'])){
+    // PERBAIKAN: Menggunakan 'firstname' (huruf kecil semua) sesuai dengan nama kolom di database kamu
+    if(isset($row['firstname']) && !empty($row['firstname'])){
+        $nama_user = $row['firstname']; 
+    } 
+    // Cadangan jika sewaktu-waktu database berubah menjadi firstName
+    else if(isset($row['firstName']) && !empty($row['firstName'])){
         $nama_user = $row['firstName']; 
-    } else {
-        $nama_user = $row['email'];
+    } 
+    // Jika nama benar-benar kosong, potong email dan ambil nama depannya saja
+    else {
+        $email_parts = explode("@", $row['email']);
+        $nama_user = $email_parts[0];
     }
 }
 ?>
@@ -118,9 +126,22 @@ if($row = mysqli_fetch_assoc($query)){
                         </div>
                     </div>
                     
-                    <div class="flex items-center cursor-pointer hover:opacity-80 transition">
-                        <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300">
-                        IND <i class="fa-solid fa-caret-down ml-1"></i>
+                    <!-- Language Dropdown -->
+                    <div class="relative group cursor-pointer hover:opacity-80 transition">
+                        <div class="flex items-center">
+                            <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300">
+                            IND <i class="fa-solid fa-caret-down ml-1"></i>
+                        </div>
+                        
+                        <!-- Menu Dropdown Bahasa (Muncul saat di-hover) -->
+                        <div class="absolute hidden group-hover:block bg-white text-black mt-2 rounded shadow-lg py-2 w-36 right-0 z-50 border border-gray-100">
+                            <a href="#" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition">
+                                <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300"> Indonesia
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition">
+                                <img src="https://flagcdn.com/w20/gb.png" alt="EN Flag" class="mr-2 h-3 border border-gray-300"> English
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -409,7 +430,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
             </div>
 
-           
+            <!-- List Mobil 3: Innova Reborn -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
                     <img src="gambar/toyota innova reborn.jpg" alt="Toyota Innova Reborn" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
@@ -435,7 +456,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
             </div>
 
-            
+            <!-- List Mobil 4: Alphard -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
                     <img src="gambar/toyota alphard.jpg" alt="Toyota Alphard" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
@@ -460,7 +481,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
             </div>
 
-           
+            <!-- List Mobil 5: Hiace -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
                     <img src="gambar/toyota hiace.jpg" alt="Toyota Hiace" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
@@ -485,7 +506,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
             </div>
 
-          
+            <!-- List Mobil 6: Hiace Premio -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
                     <img src="gambar/toyota hiace premio.jpg" alt="Toyota Hiace Premio" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">

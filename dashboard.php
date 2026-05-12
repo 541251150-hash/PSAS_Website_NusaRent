@@ -19,15 +19,15 @@ $email = $_SESSION['email'];
 $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
 
 if($row = mysqli_fetch_assoc($query)){
-    // PERBAIKAN: Menggunakan 'firstname' (huruf kecil semua) sesuai dengan nama kolom di database kamu
     if(isset($row['firstname']) && !empty($row['firstname'])){
         $nama_user = $row['firstname']; 
     } 
-    // Cadangan jika sewaktu-waktu database berubah menjadi firstName
     else if(isset($row['firstName']) && !empty($row['firstName'])){
         $nama_user = $row['firstName']; 
     } 
-    // Jika nama benar-benar kosong, potong email dan ambil nama depannya saja
+    else if(isset($row['fName']) && !empty($row['fName'])){
+        $nama_user = $row['fName']; 
+    }
     else {
         $email_parts = explode("@", $row['email']);
         $nama_user = $email_parts[0];
@@ -55,14 +55,7 @@ if($row = mysqli_fetch_assoc($query)){
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            background-color: #ffffff;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-        }
-
-        
+        body { font-family: 'Roboto', Arial, sans-serif; background-color: #ffffff; scroll-behavior: smooth; overflow-x: hidden; }
         .bg-indoloka-blue { background-color: #0076D6; }
         .btn-indoloka-blue { background-color: #006BFE; }
         .border-indoloka-yellow { border-bottom: 4px solid #FFC107; }
@@ -79,7 +72,6 @@ if($row = mysqli_fetch_assoc($query)){
         select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 10px center; background-size: 1em; }
 
         /* Hero Image Slider */
-        /* Fokus gambar agak ditarik ke atas (center 20%) agar pas */
         .hero-slider { background-image: url('https://images.unsplash.com/photo-1549473889-14f410d83298?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center 20%; height: 520px; position: relative; transition: background-image 0.6s ease-in-out; }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0) 100%); }
         .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 40px; cursor: pointer; text-shadow: 0 2px 6px rgba(0,0,0,0.6); opacity: 0.8; z-index: 30; transition: opacity 0.3s, transform 0.2s; }
@@ -98,7 +90,7 @@ if($row = mysqli_fetch_assoc($query)){
             <div class="flex justify-between items-center h-20">
                 
                 <div class="flex items-center space-x-8">
-                    <div class="flex flex-col cursor-pointer" data-aos="fade-right">
+                    <div class="flex flex-col cursor-pointer" data-aos="fade-right" onclick="window.location.href='dashboard.php'">
                         <div class="flex items-center text-3xl font-bold tracking-tight">
                             <i class="fa-solid fa-car-side mr-2"></i> NusaRent<span class="text-sm font-normal pt-2">.com</span>
                         </div>
@@ -106,41 +98,41 @@ if($row = mysqli_fetch_assoc($query)){
                     </div>
                     
                     <div class="hidden md:flex items-center space-x-6 pt-2" data-aos="fade-down" data-aos-delay="100">
-                        <a href="#" class="bg-blue-500/50 px-3 py-1 rounded text-sm font-medium hover:bg-blue-600 transition">Sewa Mobil</a>
+                        <!-- DIUBAH: Link mengarah ke sewa_mobil.php -->
+                        <a href="sewa_mobil.php" class="bg-blue-500/50 px-3 py-1 rounded text-sm font-medium hover:bg-blue-600 transition">Sewa Mobil</a>
                         <a href="#" class="text-sm font-medium hover:text-gray-200 transition">Hubungi Kami</a>
-                        <!-- MENGGANTI CORPORATE MENJADI SOCIAL MEDIA -->
                         <div class="flex items-center space-x-3 text-lg border-l border-white/30 pl-4 ml-2">
                             <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-facebook-f"></i></a>
                             <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-twitter"></i></a>
                             <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <div class="hidden md:flex items-center space-x-6 pt-2 text-sm font-medium" data-aos="fade-left">
                     <div class="relative group cursor-pointer">
-                        <span class="uppercase">HALO, <?php echo htmlspecialchars($nama_user); ?> <i class="fa-solid fa-caret-down ml-1"></i></span>
-                        <div class="absolute hidden group-hover:block bg-white text-black mt-2 rounded shadow-lg p-2 w-32 right-0 z-50">
-                            <a href="test/logout.php" class="block px-4 py-2 hover:bg-gray-100 text-red-600 font-bold transition"><i class="fa-solid fa-sign-out-alt"></i> Keluar</a>
+                        <div class="flex items-center hover:opacity-80 transition">
+                            <span class="uppercase">HALO, <?php echo htmlspecialchars($nama_user); ?></span> 
+                            <i class="fa-solid fa-caret-down ml-1"></i>
+                        </div>
+                        <div class="absolute hidden group-hover:block pt-3 w-32 right-0 z-50">
+                            <div class="bg-white text-black rounded shadow-lg p-2 border border-gray-100">
+                                <a href="test/logout.php" class="block px-4 py-2 hover:bg-gray-100 text-red-600 font-bold transition rounded"><i class="fa-solid fa-sign-out-alt"></i> Keluar</a>
+                            </div>
                         </div>
                     </div>
                     
-                    <!-- Language Dropdown -->
-                    <div class="relative group cursor-pointer hover:opacity-80 transition">
-                        <div class="flex items-center">
-                            <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300">
-                            IND <i class="fa-solid fa-caret-down ml-1"></i>
+                    <div class="relative group cursor-pointer">
+                        <div class="flex items-center hover:opacity-80 transition" id="lang-trigger">
+                            <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" id="current-flag" class="mr-2 h-3 border border-gray-300">
+                            <span id="current-lang">IND</span> 
+                            <i class="fa-solid fa-caret-down ml-1"></i>
                         </div>
-                        
-                        <!-- Menu Dropdown Bahasa (Muncul saat di-hover) -->
-                        <div class="absolute hidden group-hover:block bg-white text-black mt-2 rounded shadow-lg py-2 w-36 right-0 z-50 border border-gray-100">
-                            <a href="#" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition">
-                                <img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300"> Indonesia
-                            </a>
-                            <a href="#" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition">
-                                <img src="https://flagcdn.com/w20/gb.png" alt="EN Flag" class="mr-2 h-3 border border-gray-300"> English
-                            </a>
+                        <div class="absolute hidden group-hover:block pt-3 w-36 right-0 z-50">
+                            <div class="bg-white text-black rounded shadow-lg py-2 border border-gray-100">
+                                <a href="#" onclick="changeLanguage('id', 'IND', event)" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300"> Indonesia</a>
+                                <a href="#" onclick="changeLanguage('gb', 'ENG', event)" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/gb.png" alt="EN Flag" class="mr-2 h-3 border border-gray-300"> English</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -157,15 +149,14 @@ if($row = mysqli_fetch_assoc($query)){
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full relative">
             
-            <!-- FORM PENCARIAN -->
-            <!-- Kotak ditarik agak ke atas (top-6 md:top-10) agar dropdown meluncur ke bawah dan pas di bingkai -->
             <div class="absolute top-6 md:top-10 left-0 md:left-4 w-full md:w-[420px] px-4 md:px-0 z-20" data-aos="fade-right" data-aos-duration="1000">
                 <div class="search-box-glass">
                     <div class="search-box-header">
                         NusaRent Sewa Mobil
                     </div>
                     
-                    <form action="#" method="GET">
+                    <!-- DIUBAH: Action form diarahkan ke sewa_mobil.php -->
+                    <form action="sewa_mobil.php" method="GET">
                         <!-- Lokasi Penjemputan -->
                         <div class="mb-3">
                             <label class="form-label">Lokasi Penjemputan</label>
@@ -204,7 +195,7 @@ if($row = mysqli_fetch_assoc($query)){
                             </div>
                         </div>
 
-                        <!-- Tanggal & Lama Sewa (Grid 2 Kolom) -->
+                        <!-- Tanggal & Lama Sewa -->
                         <div class="flex gap-2 mb-3">
                             <div class="w-1/2">
                                 <label class="form-label">Tanggal Sewa</label>
@@ -226,7 +217,7 @@ if($row = mysqli_fetch_assoc($query)){
                             </div>
                         </div>
 
-                        <!-- Jumlah Unit & Paket (Grid 2 Kolom) -->
+                        <!-- Jumlah Unit & Paket -->
                         <div class="flex gap-2 mb-4">
                             <div class="w-1/2">
                                 <label class="form-label">Jumlah Unit</label>
@@ -253,8 +244,8 @@ if($row = mysqli_fetch_assoc($query)){
                             </div>
                         </div>
 
-                        <!-- TOMBOL SEARCH NOW: Akan scroll ke id="daftar-mobil" -->
-                        <button type="button" onclick="document.getElementById('daftar-mobil').scrollIntoView({behavior: 'smooth'})" class="w-full btn-indoloka-blue text-white font-bold py-3 px-4 flex items-center justify-center gap-2 hover:bg-blue-700 transition transform hover:scale-[1.02]">
+                        <!-- DIUBAH: Tombol submit biasa, akan mengarah ke action form (sewa_mobil.php) -->
+                        <button type="submit" class="w-full btn-indoloka-blue text-white font-bold py-3 px-4 flex items-center justify-center gap-2 hover:bg-blue-700 transition transform hover:scale-[1.02]">
                             SEARCH NOW <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </form>
@@ -265,12 +256,12 @@ if($row = mysqli_fetch_assoc($query)){
             <div class="hidden md:flex absolute top-1/2 -translate-y-1/2 right-0 w-[55%] flex-col items-center justify-center text-white text-center z-20" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
                 <h2 id="promo-title" class="text-[3.5rem] font-bold drop-shadow-lg mb-1 transition-all duration-300">Bandung</h2>
                 <h3 id="promo-subtitle" class="text-2xl drop-shadow-md mb-6 transition-all duration-300">Rental Mobil Bandung</h3>
-                <!-- TOMBOL BOOK NOW: Mengarah ke id="daftar-mobil" -->
-                <a href="#daftar-mobil" class="btn-indoloka-blue px-8 py-3 text-xl font-bold shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1">BOOK NOW !</a>
+                <!-- DIUBAH: Mengarah ke sewa_mobil.php -->
+                <a href="sewa_mobil.php" class="btn-indoloka-blue px-8 py-3 text-xl font-bold shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1">BOOK NOW !</a>
             </div>
 
             <div id="promo-location" class="absolute bottom-5 right-0 text-white text-lg font-medium italic drop-shadow-lg z-20">
-                Lokasi : Kota Bandung
+                Lokasi : Jembatan Pasupati
             </div>
 
         </div>
@@ -284,35 +275,36 @@ if($row = mysqli_fetch_assoc($query)){
             <h2 class="text-lg font-bold text-gray-800 mb-6 uppercase border-b border-gray-300 pb-2 inline-block" data-aos="fade-up">AYO JALAN - JALAN KE KOTA MENARIK INI</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-2">
-                <div class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="0">
+                <!-- Semua link gambar kota diarahkan ke sewa_mobil.php -->
+                <a href="sewa_mobil.php" class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="0">
                     <img src="gambar/jakarta.jpg" alt="Jakarta" class="w-full h-56 object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute bottom-0 left-0 w-full bg-black/50 p-2 flex flex-col items-center justify-center translate-y-0 group-hover:-translate-y-2 transition duration-300"><p class="text-white text-2xl font-normal tracking-wide">Jakarta</p><p class="text-gray-300 text-xs italic mt-1 opacity-0 group-hover:opacity-100 transition duration-300">Lebih dari 400 rental</p></div>
-                </div>
+                </a>
 
-                <div class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="100">
+                <a href="sewa_mobil.php" class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="100">
                     <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=800&auto=format&fit=crop" alt="Bali" class="w-full h-56 object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute bottom-0 left-0 w-full bg-black/50 p-2 flex flex-col items-center justify-center translate-y-0 group-hover:-translate-y-2 transition duration-300"><p class="text-white text-2xl font-normal tracking-wide">Bali</p><p class="text-gray-300 text-xs italic mt-1 opacity-0 group-hover:opacity-100 transition duration-300">Lebih dari 400 rental</p></div>
-                </div>
+                </a>
 
-                <div class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="200">
+                <a href="sewa_mobil.php" class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="200">
                     <img src="https://images.unsplash.com/photo-1549473889-14f410d83298?q=80&w=800&auto=format&fit=crop" alt="Bandung" class="w-full h-56 object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute bottom-0 left-0 w-full bg-black/50 p-2 flex flex-col items-center justify-center translate-y-0 group-hover:-translate-y-2 transition duration-300"><p class="text-white text-2xl font-normal tracking-wide">Bandung</p><p class="text-gray-300 text-xs italic mt-1 opacity-0 group-hover:opacity-100 transition duration-300">Lebih dari 400 rental</p></div>
-                </div>
+                </a>
 
-                <div class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="0">
+                <a href="sewa_mobil.php" class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="0">
                     <img src="gambar/malang.jpg" alt="Malang" class="w-full h-56 object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute bottom-0 left-0 w-full bg-black/50 p-2 flex flex-col items-center justify-center translate-y-0 group-hover:-translate-y-2 transition duration-300"><p class="text-white text-2xl font-normal tracking-wide">Malang</p><p class="text-gray-300 text-xs italic mt-1 opacity-0 group-hover:opacity-100 transition duration-300">Lebih dari 400 rental</p></div>
-                </div>
+                </a>
 
-                <div class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="100">
+                <a href="sewa_mobil.php" class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="100">
                     <img src="gambar/jogja.PNG" alt="Yogyakarta" class="w-full h-56 object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute bottom-0 left-0 w-full bg-black/50 p-2 flex flex-col items-center justify-center translate-y-0 group-hover:-translate-y-2 transition duration-300"><p class="text-white text-2xl font-normal tracking-wide">Yogyakarta</p><p class="text-gray-300 text-xs italic mt-1 opacity-0 group-hover:opacity-100 transition duration-300">Lebih dari 400 rental</p></div>
-                </div>
+                </a>
 
-                <div class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="200">
+                <a href="sewa_mobil.php" class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="200">
                     <img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?q=80&w=800&auto=format&fit=crop" alt="Surabaya" class="w-full h-56 object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute bottom-0 left-0 w-full bg-black/50 p-2 flex flex-col items-center justify-center translate-y-0 group-hover:-translate-y-2 transition duration-300"><p class="text-white text-2xl font-normal tracking-wide">Surabaya</p><p class="text-gray-300 text-xs italic mt-1 opacity-0 group-hover:opacity-100 transition duration-300">Lebih dari 400 rental</p></div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -338,13 +330,13 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
                 <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-xl hover:-translate-y-2 transition duration-300" data-aos="fade-up" data-aos-delay="100">
                     <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex items-center justify-center text-white mb-5 hover:scale-110 transition duration-300"><i class="fa-regular fa-clock text-[55px]"></i></div>
-                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">Easy to Order3.</h3><p class="text-gray-600 text-sm px-2">Online order nya cepat, mudah & murah.</p>
+                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">Easy to Order</h3><p class="text-gray-600 text-sm px-2">Online order nya cepat, mudah & murah.</p>
                 </div>
                 <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-xl hover:-translate-y-2 transition duration-300" data-aos="fade-up" data-aos-delay="200">
                     <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex items-center justify-center text-white mb-5 hover:scale-110 transition duration-300">
                         <div class="flex flex-col items-center justify-center mt-3"><i class="fa-solid fa-car text-2xl -mb-1"></i><div class="flex gap-1"><i class="fa-solid fa-car text-3xl"></i><i class="fa-solid fa-car text-3xl"></i></div></div>
                     </div>
-                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">100+ cars</h3><p class="text-gray-600 text-[13px] leading-relaxed">NusaRent sewa mobil memiliki Lebih dari 10.000 mobil. NusaRent rental mobil tersedia di 90 kota di Indonesia.</p>
+                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">10,000+ Cars in 90 Cities</h3><p class="text-gray-600 text-[13px] leading-relaxed">NusaRent sewa mobil memiliki Lebih dari 10.000 mobil. NusaRent rental mobil tersedia di 90 kota di Indonesia.</p>
                 </div>
                 <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-xl hover:-translate-y-2 transition duration-300" data-aos="fade-up" data-aos-delay="300">
                     <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex flex-col items-center justify-center text-white mb-5 pt-2 hover:scale-110 transition duration-300">
@@ -358,335 +350,12 @@ if($row = mysqli_fetch_assoc($query)){
         </div>
     </section>
 
-    <!-- SECTION BARU: DAFTAR ARMADA MOBIL (Sesuai Video) -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2" data-aos="fade-in"><div class="flex h-[2px] w-full mb-8 bg-gray-200"></div></div>
-    
-    <section id="daftar-mobil" class="pb-20 pt-8 bg-[#f9f9f9]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-gray-800" data-aos="fade-right">12 MOBIL DITEMUKAN</h2>
-                <div class="flex items-center gap-2 text-sm text-gray-600" data-aos="fade-left">
-                    <span>Sorted by:</span>
-                    <select class="border border-gray-300 rounded px-2 py-1 bg-white outline-none">
-                        <option>Harga Termurah</option>
-                        <option>Rekomendasi</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- List Mobil 1: Avanza -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota all new avanza.jpg" alt="Toyota Avanza" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Toyota All New Avanza</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2020-2023</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake" title="AC"></i>
-                        <i class="fa-solid fa-users" title="7 Penumpang"></i>
-                        <i class="fa-solid fa-suitcase" title="2 Koper"></i>
-                        <i class="fa-solid fa-gas-pump" title="Bensin"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> NusaRent car rental</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Pemakaian radius 40 km</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir / Dropoff</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-xs text-gray-400 line-through mb-1">Rp. 500.000</p>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 450.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 450.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 2: Xpander -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="100">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/mitshubishi xpander.jpg" alt="Mitsubishi Xpander" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Mitsubishi Xpander</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2021-2023</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> NusaRent car rental</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Pemakaian radius 40 km</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir / Dropoff</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-xs text-gray-400 line-through mb-1">Rp. 550.000</p>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 480.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 480.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 3: Innova Reborn -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota innova reborn.jpg" alt="Toyota Innova Reborn" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Toyota Innova Reborn</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2018-2022</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> NusaRent premium rental</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Dalam Kota & Luar Kota</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir / Dropoff</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-xs text-gray-400 line-through mb-1">Rp. 850.000</p>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 750.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 750.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 4: Alphard -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota alphard.jpg" alt="Toyota Alphard" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Toyota Alphard</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2021-2024</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> Layanan VIP VVIP</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Pemakaian Dalam Kota</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir Eksklusif</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 2.500.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 2.500.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 5: Hiace -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota hiace.jpg" alt="Toyota Hiace" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Toyota Hiace Commuter</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2019-2022</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users" title="15 Penumpang"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> Kapasitas Besar (15 Orang)</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Pemakaian Tour / Wisata</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir Pariwisata</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 1.400.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 1.400.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 6: Hiace Premio -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota hiace premio.jpg" alt="Toyota Hiace Premio" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Toyota Hiace Premio</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2022-2024</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users" title="12 Penumpang"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> Eksekutif Van (Captain Seat)</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Tour Mewah Keluarga</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir Profesional</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 1.800.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 1.800.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 7: Pajero Sport -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/mitshubishi pajero.jpg" alt="Mitsubishi Pajero Sport" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Mitsubishi Pajero Sport</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2021-2023</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> SUV Premium Tangguh</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Cocok untuk Segala Medan</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 1.500.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 1.500.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 8: Daihatsu Xenia -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/daihatsu all newxenia.jpg" alt="Daihatsu All New Xenia" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Daihatsu All New Xenia</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2022-2024</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> Mobil Keluarga Ekonomis</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Hemat Bahan Bakar</li>
-                        <li><i class="fa-solid fa-key text-gray-700 mr-2 w-4"></i> Lepas Kunci / Dengan Supir</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <p class="text-xs text-gray-400 line-through mb-1">Rp. 450.000</p>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 350.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 350.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 9: Toyota Raize -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota raize.jpg" alt="Toyota Raize" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Toyota Raize</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2022-2023</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users" title="5 Penumpang"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> Compact SUV Kekinian</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Lincah di Perkotaan</li>
-                        <li><i class="fa-solid fa-key text-gray-700 mr-2 w-4"></i> Lepas Kunci Tersedia</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 450.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 450.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 10: Toyota Rush -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota rush.jpg" alt="Toyota Rush" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Toyota Rush GR Sport</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2021-2023</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> SUV Sporty 7 Penumpang</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Ground Clearance Tinggi</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 550.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 550.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 11: Toyota Veloz -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota veloz.jpg" alt="Toyota Veloz" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Toyota All New Veloz</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2022-2024</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-gas-pump"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> MPV Nyaman & Canggih</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Nyaman Untuk Perjalanan Jauh</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 500.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 500.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-            <!-- List Mobil 12: Toyota Zenix -->
-            <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
-                <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota zenix.jpg" alt="Toyota Innova Zenix" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
-                </div>
-                <div class="w-full md:w-1/2 flex flex-col justify-center">
-                    <h3 class="text-2xl font-bold text-gray-800">Toyota Innova Zenix Hybrid</h3>
-                    <p class="text-gray-500 text-sm mb-4">Tahun Mobil 2023-2024</p>
-                    <div class="flex gap-4 text-gray-400 mb-4 text-lg">
-                        <i class="fa-solid fa-snowflake"></i><i class="fa-solid fa-users"></i><i class="fa-solid fa-suitcase"></i><i class="fa-solid fa-leaf text-green-500" title="Hybrid"></i>
-                    </div>
-                    <ul class="text-sm text-gray-600 space-y-1">
-                        <li><i class="fa-solid fa-check text-green-500 mr-2 w-4"></i> Kabin Sangat Senyap & Luas</li>
-                        <li><i class="fa-solid fa-location-crosshairs text-blue-500 mr-2 w-4"></i> Sangat Hemat BBM (Hybrid)</li>
-                        <li><i class="fa-solid fa-user-tie text-gray-700 mr-2 w-4"></i> Termasuk Supir Eksklusif</li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 border-t md:border-t-0 md:border-l border-gray-200 pt-4 md:pt-0 md:pl-6 flex flex-col justify-center items-end text-right">
-                    <span class="bg-blue-100 text-blue-800 text-[11px] font-bold px-3 py-1 rounded mb-3 flex items-center gap-1"><i class="fa-solid fa-bolt"></i> INSTANT BOOKING</span>
-                    <p class="text-2xl font-bold text-[#ff4b00] mb-1">Rp. 900.000 <span class="text-xs font-normal text-gray-500">/ 12 Jam</span></p>
-                    <p class="text-xs text-gray-500 mb-5">Total Bayar: Rp. 900.000</p>
-                    <button class="bg-[#ff9800] hover:bg-[#e68a00] text-white font-bold py-2 px-6 rounded shadow-md transition transform hover:scale-105 w-full">PESAN SEKARANG</button>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
     <!-- Footer Simple -->
-    <footer class="bg-gray-100 border-t border-gray-200 text-gray-600 py-8">
+    <footer class="bg-[#1a2b4c] text-gray-300 py-10 mt-10 border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-sm">© <?php echo date("Y"); ?> NusaRent (Sewa Mobil Online). All Rights Reserved.</p>
+            <h3 class="text-white text-xl font-bold mb-4"><i class="fa-solid fa-car-side"></i> NusaRent</h3>
+            <p class="text-sm mb-4">Sewa Mobil Online Mudah, Aman, dan Terpercaya di Seluruh Indonesia.</p>
+            <p class="text-sm opacity-75">© <?php echo date("Y"); ?> NusaRent (Sewa Mobil Online). All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -698,46 +367,18 @@ if($row = mysqli_fetch_assoc($query)){
     <!-- SCRIPT AOS ANIMASI -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- JAVASCRIPT UNTUK ANIMASI SLIDER & INIT AOS -->
+    <!-- JAVASCRIPT UNTUK ANIMASI SLIDER, INIT AOS & BAHASA -->
     <script>
         // Inisialisasi AOS (Animasi Scroll)
-        AOS.init({
-            once: true, // Animasi hanya berjalan sekali saat di-scroll
-            offset: 50, // Muncul lebih awal
-        });
+        AOS.init({ once: true, offset: 50 });
 
         // Data untuk masing-masing slide 
         const slides = [
-            {
-                image: "url('https://images.unsplash.com/photo-1549473889-14f410d83298?q=80&w=2000&auto=format&fit=crop')",
-                title: "Bandung",
-                subtitle: "Rental Mobil Bandung",
-                location: "Lokasi : Kota Bandung"
-            },
-            {
-                image: "url('gambar/jakarta.jpg')", 
-                title: "Jakarta",
-                subtitle: "Rental Mobil Jakarta",
-                location: "Lokasi : Kota Jakarta"
-            },
-            {
-                image: "url('gambar/jogja.PNG')", 
-                title: "Yogyakarta",
-                subtitle: "Rental Mobil Yogyakarta",
-                location: "Lokasi : Candi Prambanan"
-            },
-            {
-                image: "url('gambar/malang.jpg')", 
-                title: "Malang",
-                subtitle: "Rental Mobil Malang",
-                location: "Lokasi : Kota Malang"
-            },
-            {
-                image: "url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=2000&auto=format&fit=crop')", 
-                title: "Bali",
-                subtitle: "Rental Mobil Bali",
-                location: "Lokasi : Kota Bali"
-            }
+            { image: "url('https://images.unsplash.com/photo-1549473889-14f410d83298?q=80&w=2000&auto=format&fit=crop')", title: "Bandung", subtitle: "Rental Mobil Bandung", location: "Lokasi : Jembatan Pasupati" },
+            { image: "url('gambar/jakarta.jpg')", title: "Jakarta", subtitle: "Rental Mobil Jakarta", location: "Lokasi : Monumen Nasional" },
+            { image: "url('gambar/jogja.PNG')", title: "Yogyakarta", subtitle: "Rental Mobil Yogyakarta", location: "Lokasi : Candi Prambanan" },
+            { image: "url('gambar/malang.jpg')", title: "Malang", subtitle: "Rental Mobil Malang", location: "Lokasi : Gunung Bromo" },
+            { image: "url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=2000&auto=format&fit=crop')", title: "Bali", subtitle: "Rental Mobil Bali", location: "Lokasi : Pura Ulun Danu" }
         ];
 
         let currentIndex = 0;
@@ -747,7 +388,6 @@ if($row = mysqli_fetch_assoc($query)){
         const promoLocation = document.getElementById('promo-location');
         const dotsContainer = document.getElementById('slider-dots-container');
 
-        // Fungsi membuat titik (dots) di bawah slider
         function setupDots() {
             slides.forEach((_, index) => {
                 const dot = document.createElement('div');
@@ -758,11 +398,9 @@ if($row = mysqli_fetch_assoc($query)){
             });
         }
 
-        // Fungsi Update Tampilan Slider
         function updateSlider() {
             heroSlider.style.backgroundImage = slides[currentIndex].image;
             
-            // Efek ganti teks
             promoTitle.style.opacity = '0';
             promoSubtitle.style.opacity = '0';
             promoLocation.style.opacity = '0';
@@ -777,35 +415,30 @@ if($row = mysqli_fetch_assoc($query)){
                 promoLocation.style.opacity = '1';
             }, 300);
 
-            // Update status titik aktif
             document.querySelectorAll('.dot').forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentIndex);
             });
         }
 
-        function nextSlide() {
-            currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
-            updateSlider();
-        }
-
-        function prevSlide() {
-            currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
-            updateSlider();
-        }
-
-        function goToSlide(index) {
-            currentIndex = index;
-            updateSlider();
-        }
+        function nextSlide() { currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1; updateSlider(); }
+        function prevSlide() { currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1; updateSlider(); }
+        function goToSlide(index) { currentIndex = index; updateSlider(); }
 
         document.getElementById('btn-next').addEventListener('click', nextSlide);
         document.getElementById('btn-prev').addEventListener('click', prevSlide);
 
-        // Auto-play Slider setiap 5 detik
         setInterval(nextSlide, 5000);
-
-        // Inisialisasi awal
         setupDots();
+
+        // FUNGSI BAHASA
+        function changeLanguage(flagCode, langText, event) {
+            event.preventDefault();
+            document.getElementById('current-flag').src = `https://flagcdn.com/w20/${flagCode}.png`;
+            document.getElementById('current-lang').innerText = langText;
+            const trigger = document.getElementById('lang-trigger');
+            trigger.parentElement.classList.remove('group');
+            setTimeout(() => { trigger.parentElement.classList.add('group'); }, 100);
+        }
     </script>
 </body>
 </html>

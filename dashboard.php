@@ -62,7 +62,7 @@ if($row = mysqli_fetch_assoc($query)){
             overflow-x: hidden;
         }
 
-        /* Warna Biru Khas Indoloka */
+        
         .bg-indoloka-blue { background-color: #0076D6; }
         .btn-indoloka-blue { background-color: #006BFE; }
         .border-indoloka-yellow { border-bottom: 4px solid #FFC107; }
@@ -270,7 +270,7 @@ if($row = mysqli_fetch_assoc($query)){
             </div>
 
             <div id="promo-location" class="absolute bottom-5 right-0 text-white text-lg font-medium italic drop-shadow-lg z-20">
-                Lokasi : Jembatan Pasupati
+                Lokasi : Kota Bandung
             </div>
 
         </div>
@@ -338,13 +338,13 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
                 <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-xl hover:-translate-y-2 transition duration-300" data-aos="fade-up" data-aos-delay="100">
                     <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex items-center justify-center text-white mb-5 hover:scale-110 transition duration-300"><i class="fa-regular fa-clock text-[55px]"></i></div>
-                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">Easy to Order</h3><p class="text-gray-600 text-sm px-2">Online order nya cepat, mudah & murah.</p>
+                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">Easy to Order3.</h3><p class="text-gray-600 text-sm px-2">Online order nya cepat, mudah & murah.</p>
                 </div>
                 <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-xl hover:-translate-y-2 transition duration-300" data-aos="fade-up" data-aos-delay="200">
                     <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex items-center justify-center text-white mb-5 hover:scale-110 transition duration-300">
                         <div class="flex flex-col items-center justify-center mt-3"><i class="fa-solid fa-car text-2xl -mb-1"></i><div class="flex gap-1"><i class="fa-solid fa-car text-3xl"></i><i class="fa-solid fa-car text-3xl"></i></div></div>
                     </div>
-                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">10,000+ Cars in 90 Cities</h3><p class="text-gray-600 text-[13px] leading-relaxed">NusaRent sewa mobil memiliki Lebih dari 10.000 mobil. NusaRent rental mobil tersedia di 90 kota di Indonesia.</p>
+                    <h3 class="text-[#1ba0e2] font-bold text-lg mb-2">100+ cars</h3><p class="text-gray-600 text-[13px] leading-relaxed">NusaRent sewa mobil memiliki Lebih dari 10.000 mobil. NusaRent rental mobil tersedia di 90 kota di Indonesia.</p>
                 </div>
                 <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-xl hover:-translate-y-2 transition duration-300" data-aos="fade-up" data-aos-delay="300">
                     <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex flex-col items-center justify-center text-white mb-5 pt-2 hover:scale-110 transition duration-300">
@@ -712,13 +712,13 @@ if($row = mysqli_fetch_assoc($query)){
                 image: "url('https://images.unsplash.com/photo-1549473889-14f410d83298?q=80&w=2000&auto=format&fit=crop')",
                 title: "Bandung",
                 subtitle: "Rental Mobil Bandung",
-                location: "Lokasi : Jembatan Pasupati"
+                location: "Lokasi : Kota Bandung"
             },
             {
                 image: "url('gambar/jakarta.jpg')", 
                 title: "Jakarta",
                 subtitle: "Rental Mobil Jakarta",
-                location: "Lokasi : Monumen Nasional"
+                location: "Lokasi : Kota Jakarta"
             },
             {
                 image: "url('gambar/jogja.PNG')", 
@@ -730,13 +730,13 @@ if($row = mysqli_fetch_assoc($query)){
                 image: "url('gambar/malang.jpg')", 
                 title: "Malang",
                 subtitle: "Rental Mobil Malang",
-                location: "Lokasi : Gunung Bromo"
+                location: "Lokasi : Kota Malang"
             },
             {
                 image: "url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?q=80&w=2000&auto=format&fit=crop')", 
                 title: "Bali",
                 subtitle: "Rental Mobil Bali",
-                location: "Lokasi : Pura Ulun Danu"
+                location: "Lokasi : Kota Bali"
             }
         ];
 

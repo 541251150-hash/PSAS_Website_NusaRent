@@ -77,21 +77,25 @@ if($row = mysqli_fetch_assoc($query)){
     <nav class="bg-indoloka-blue border-indoloka-yellow text-white w-full fixed top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
+                
                 <div class="flex items-center space-x-8">
                     <!-- Logo diarahkan kembali ke dashboard.php -->
-                    <a href="dashboard.php" class="flex flex-col cursor-pointer hover:opacity-90 transition">
+                    <div class="flex flex-col cursor-pointer" onclick="window.location.href='dashboard.php'">
                         <div class="flex items-center text-3xl font-bold tracking-tight">
                             <i class="fa-solid fa-car-side mr-2"></i> NusaRent<span class="text-sm font-normal pt-2">.com</span>
                         </div>
                         <span class="text-xs font-medium tracking-wide">Sewa Mobil Online No 1 di Indonesia</span>
-                    </a>
+                    </div>
                     
                     <div class="hidden md:flex items-center space-x-6 pt-2">
+                        <!-- MENU BARU: HOME (Mengarah ke dashboard.php) -->
+                        <a href="dashboard.php" class="text-sm font-medium hover:text-gray-200 transition">Home</a>
+                        
                         <a href="sewa_mobil.php" class="bg-blue-500/50 px-3 py-1 rounded text-sm font-medium hover:bg-blue-600 transition">Sewa Mobil</a>
-                        <a href="#" class="text-sm font-medium hover:text-gray-200 transition">Hubungi Kami</a>
+                        <a href="hubungi_kami.php" class="text-sm font-medium hover:text-gray-200 transition">Hubungi Kami</a>
                         <div class="flex items-center space-x-3 text-lg border-l border-white/30 pl-4 ml-2">
-                            <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-twitter"></i></a>
+                            <!-- Facebook dan Twitter diganti WhatsApp -->
+                            <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
                             <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
                         </div>
                     </div>
@@ -129,13 +133,12 @@ if($row = mysqli_fetch_assoc($query)){
     </nav>
 
     <!-- HEADER & FORM PENCARIAN -->
-    <!-- Menggunakan background biru agar form terlihat menonjol dan rapi di halaman khusus ini -->
     <section class="pt-28 pb-12 bg-[#005ea6]">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" data-aos="fade-down" data-aos-duration="800">
             <div class="search-box-glass">
                 <div class="search-box-header">Ubah Kriteria Pencarian Anda</div>
                 
-                <form action="#" method="GET">
+                <form action="sewa_mobil.php" method="GET">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <!-- Lokasi Penjemputan -->
                         <div>

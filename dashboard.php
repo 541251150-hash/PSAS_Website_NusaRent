@@ -80,6 +80,35 @@ if($row = mysqli_fetch_assoc($query)){
         .slider-dots { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 30; }
         .dot { width: 12px; height: 12px; background-color: rgba(255,255,255,0.5); border-radius: 50%; cursor: pointer; transition: background-color 0.3s; }
         .dot.active { background-color: white; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+
+        /* =========================================================
+           TAMBAHAN EFEK ANIMASI SHOWCASE ARMADA
+           ========================================================= */
+        .tab-btn {
+            position: relative;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: none;
+        }
+        .tab-btn::after {
+            content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 3px; background-color: #0076D6; border-radius: 4px; transition: all 0.3s ease;
+        }
+        .tab-btn.active { color: #0076D6; font-weight: 700; }
+        .tab-btn.active::after { width: 100%; }
+        
+        .car-showcase-enter { 
+            animation: carEnter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; 
+        }
+        @keyframes carEnter {
+            0% { opacity: 0; transform: scale(0.85) translateX(50px); filter: blur(4px); }
+            100% { opacity: 1; transform: scale(1) translateX(0); filter: blur(0); }
+        }
+        
+        .stage-floor {
+            transform: rotateX(70deg);
+            background: radial-gradient(ellipse at center, rgba(0, 118, 214, 0.2) 0%, transparent 70%);
+        }
     </style>
 </head>
 <body class="antialiased" id="top">
@@ -98,12 +127,13 @@ if($row = mysqli_fetch_assoc($query)){
                     </div>
                     
                     <div class="hidden md:flex items-center space-x-6 pt-2" data-aos="fade-down" data-aos-delay="100">
-                        <!-- DIUBAH: Link mengarah ke sewa_mobil.php -->
+                        <!-- MENU BARU: HOME (Mengarah ke dashboard.php) -->
+                        <a href="dashboard.php" class="text-sm font-medium hover:text-gray-200 transition">Home</a>
+                        
                         <a href="sewa_mobil.php" class="bg-blue-500/50 px-3 py-1 rounded text-sm font-medium hover:bg-blue-600 transition">Sewa Mobil</a>
-                        <a href="#" class="text-sm font-medium hover:text-gray-200 transition">Hubungi Kami</a>
+                        <a href="hubungi_kami.php" class="text-sm font-medium hover:text-gray-200 transition">Hubungi Kami</a>
                         <div class="flex items-center space-x-3 text-lg border-l border-white/30 pl-4 ml-2">
-                            <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-whatsapp"></i></a>
                             <a href="#" class="hover:text-gray-300 transition hover:scale-110"><i class="fa-brands fa-instagram"></i></a>
                         </div>
                     </div>
@@ -155,7 +185,6 @@ if($row = mysqli_fetch_assoc($query)){
                         NusaRent Sewa Mobil
                     </div>
                     
-                    <!-- DIUBAH: Action form diarahkan ke sewa_mobil.php -->
                     <form action="sewa_mobil.php" method="GET">
                         <!-- Lokasi Penjemputan -->
                         <div class="mb-3">
@@ -244,7 +273,6 @@ if($row = mysqli_fetch_assoc($query)){
                             </div>
                         </div>
 
-                        <!-- DIUBAH: Tombol submit biasa, akan mengarah ke action form (sewa_mobil.php) -->
                         <button type="submit" class="w-full btn-indoloka-blue text-white font-bold py-3 px-4 flex items-center justify-center gap-2 hover:bg-blue-700 transition transform hover:scale-[1.02]">
                             SEARCH NOW <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
@@ -256,7 +284,6 @@ if($row = mysqli_fetch_assoc($query)){
             <div class="hidden md:flex absolute top-1/2 -translate-y-1/2 right-0 w-[55%] flex-col items-center justify-center text-white text-center z-20" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
                 <h2 id="promo-title" class="text-[3.5rem] font-bold drop-shadow-lg mb-1 transition-all duration-300">Bandung</h2>
                 <h3 id="promo-subtitle" class="text-2xl drop-shadow-md mb-6 transition-all duration-300">Rental Mobil Bandung</h3>
-                <!-- DIUBAH: Mengarah ke sewa_mobil.php -->
                 <a href="sewa_mobil.php" class="btn-indoloka-blue px-8 py-3 text-xl font-bold shadow-lg hover:bg-blue-700 transition transform hover:-translate-y-1">BOOK NOW !</a>
             </div>
 
@@ -275,7 +302,6 @@ if($row = mysqli_fetch_assoc($query)){
             <h2 class="text-lg font-bold text-gray-800 mb-6 uppercase border-b border-gray-300 pb-2 inline-block" data-aos="fade-up">AYO JALAN - JALAN KE KOTA MENARIK INI</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-2">
-                <!-- Semua link gambar kota diarahkan ke sewa_mobil.php -->
                 <a href="sewa_mobil.php" class="relative group cursor-pointer overflow-hidden shadow-sm hover:shadow-lg transition" data-aos="zoom-in-up" data-aos-delay="0">
                     <img src="gambar/jakarta.jpg" alt="Jakarta" class="w-full h-56 object-cover group-hover:scale-110 transition duration-700">
                     <div class="absolute bottom-0 left-0 w-full bg-black/50 p-2 flex flex-col items-center justify-center translate-y-0 group-hover:-translate-y-2 transition duration-300"><p class="text-white text-2xl font-normal tracking-wide">Jakarta</p><p class="text-gray-300 text-xs italic mt-1 opacity-0 group-hover:opacity-100 transition duration-300">Lebih dari 400 rental</p></div>
@@ -309,8 +335,69 @@ if($row = mysqli_fetch_assoc($query)){
         </div>
     </section>
 
+    <!-- =========================================================================
+         SECTION BARU: SHOWCASE ARMADA INTERAKTIF DENGAN GAYA FORMAL TAPI MEWAH
+         ========================================================================= -->
+    <section class="py-16 bg-gray-50 relative overflow-hidden border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <h2 class="text-xl font-bold text-gray-800 mb-2 uppercase" data-aos="fade-down">PILIHAN ARMADA TERBAIK KAMI</h2>
+            <!-- Garis khas indoloka diposisikan di tengah -->
+            <div class="w-24 h-[3px] bg-[#0076D6] mx-auto mb-8" data-aos="fade-up" data-aos-delay="100"></div>
+
+            <!-- TAB KATEGORI KENDARAAN (Elegan) -->
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 mt-6" data-aos="fade-up" data-aos-delay="200">
+                <button onclick="filterFleet('MPV', this)" class="tab-btn active px-4 py-2 text-gray-500 text-lg uppercase tracking-wide cursor-pointer focus:outline-none hover:text-[#0076D6]">MPV</button>
+                <button onclick="filterFleet('SUV', this)" class="tab-btn px-4 py-2 text-gray-500 text-lg uppercase tracking-wide cursor-pointer focus:outline-none hover:text-[#0076D6]">SUV</button>
+                <button onclick="filterFleet('Luxury', this)" class="tab-btn px-4 py-2 text-gray-500 text-lg uppercase tracking-wide cursor-pointer focus:outline-none hover:text-[#0076D6]">Luxury</button>
+                <button onclick="filterFleet('Niaga', this)" class="tab-btn px-4 py-2 text-gray-500 text-lg uppercase tracking-wide cursor-pointer focus:outline-none hover:text-[#0076D6]">Niaga</button>
+            </div>
+
+            <!-- STAGE PANGGUNG 3D -->
+            <div class="mt-12 relative w-full max-w-4xl mx-auto" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1200">
+                
+                <!-- Lantai Panggung 3D (Refleksi Transparan) -->
+                <div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-3/4 h-32 stage-floor -z-10"></div>
+                
+                <div class="flex items-center justify-between">
+                    <!-- Tombol Panah Kiri -->
+                    <button onclick="prevCar()" class="w-12 h-12 bg-white text-[#0076D6] rounded-full shadow-lg hover:bg-[#0076D6] hover:text-white transition-all duration-300 z-20 flex items-center justify-center text-xl border border-gray-100 transform hover:scale-110 hover:-translate-x-2">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    
+                    <!-- Panggung Tampil Mobil -->
+                    <div class="flex-1 px-4 relative h-[360px] flex flex-col items-center justify-center">
+                        <div id="showcase-container" class="w-full flex flex-col items-center">
+                            <!-- Drop-shadow memberikan efek mobil memiliki bayangan di lantai -->
+                            <img id="showcase-car-img" src="gambar/toyota all new avanza.jpg" alt="Mobil" class="max-h-[200px] object-contain drop-shadow-2xl transition-transform hover:scale-[1.15] duration-500">
+                            
+                            <div class="mt-10">
+                                <h3 id="showcase-car-name" class="text-3xl font-bold text-gray-800 tracking-tight">Toyota All New Avanza</h3>
+                                <p id="showcase-car-desc" class="text-[#0076D6] font-medium mt-2 text-lg">Nyaman untuk keluarga, irit bahan bakar.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Panah Kanan -->
+                    <button onclick="nextCar()" class="w-12 h-12 bg-white text-[#0076D6] rounded-full shadow-lg hover:bg-[#0076D6] hover:text-white transition-all duration-300 z-20 flex items-center justify-center text-xl border border-gray-100 transform hover:scale-110 hover:translate-x-2">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Tombol Action -->
+                <div class="mt-4 relative z-30" data-aos="fade-up" data-aos-delay="400">
+                    <a href="sewa_mobil.php" class="inline-flex items-center gap-2 btn-indoloka-blue text-white px-8 py-3 rounded text-lg font-bold shadow-md hover:bg-blue-700 transition transform hover:-translate-y-1">
+                        <i class="fa-solid fa-car"></i> PESAN KENDARAAN INI 
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- MENGAPA SEWA MOBIL SECTION -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6" data-aos="fade-in"><div class="flex h-1.5 w-full mb-8"><div class="w-1/3 bg-[#1ba0e2]"></div><div class="w-1/3 bg-[#ffb400]"></div><div class="w-1/3 bg-[#ff4b00]"></div></div></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12" data-aos="fade-in">
+        <div class="flex h-1.5 w-full mb-8"><div class="w-1/3 bg-[#1ba0e2]"></div><div class="w-1/3 bg-[#ffb400]"></div><div class="w-1/3 bg-[#ff4b00]"></div></div>
+    </div>
     
     <section class="pb-16 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -438,6 +525,75 @@ if($row = mysqli_fetch_assoc($query)){
             const trigger = document.getElementById('lang-trigger');
             trigger.parentElement.classList.remove('group');
             setTimeout(() => { trigger.parentElement.classList.add('group'); }, 100);
+        }
+
+        // ==========================================================
+        // FUNGSI LOGIKA GALERI ARMADA KAMI (INTERAKTIF SHOWCASE)
+        // ==========================================================
+        const fleetData = [
+            // Kategori MPV
+            { category: 'MPV', name: 'Toyota All New Avanza', img: 'gambar/toyota all new avanza.jpg', desc: 'Mobil keluarga andalan dengan efisiensi tinggi.' },
+            { category: 'MPV', name: 'Mitsubishi Xpander', img: 'gambar/mitshubishi xpander.jpg', desc: 'Desain futuristik tangguh dengan kabin super luas.' },
+            { category: 'MPV', name: 'Daihatsu All New Xenia', img: 'gambar/daihatsu all newxenia.jpg', desc: 'Ekonomis, handal, dan sangat fungsional.' },
+            { category: 'MPV', name: 'Toyota All New Veloz', img: 'gambar/toyota veloz.jpg', desc: 'MPV premium dengan fitur tercanggih dan mewah.' },
+            
+            // Kategori SUV
+            { category: 'SUV', name: 'Toyota Rush GR Sport', img: 'gambar/toyota rush.jpg', desc: 'Sporty & stylish, siap melibas segala medan.' },
+            { category: 'SUV', name: 'Toyota Raize', img: 'gambar/toyota raize.jpg', desc: 'Compact SUV yang lincah untuk kaum urban.' },
+            { category: 'SUV', name: 'Mitsubishi Pajero Sport', img: 'gambar/mitshubishi pajero.jpg', desc: 'Performa mesin buas, mewah & maskulin.' },
+            
+            // Kategori Luxury (Zenix dimasukkan kesini juga sebagai opsi Premium)
+            { category: 'Luxury', name: 'Toyota Alphard', img: 'gambar/toyota alphard.jpg', desc: 'Simbol kesuksesan dengan kenyamanan VIP.' },
+            { category: 'Luxury', name: 'Toyota Innova Reborn', img: 'gambar/toyota innova reborn.jpg', desc: 'Kenyamanan ekstra legendaris untuk perjalanan jauh.' },
+            { category: 'Luxury', name: 'Toyota Innova Zenix Hybrid', img: 'gambar/toyota zenix.jpg', desc: 'Teknologi hybrid masa depan, ramah lingkungan.' },
+            
+            // Kategori Niaga
+            { category: 'Niaga', name: 'Toyota Hiace Commuter', img: 'gambar/toyota hiace.jpg', desc: 'Kapasitas maksimal untuk rombongan wisata.' },
+            { category: 'Niaga', name: 'Toyota Hiace Premio', img: 'gambar/toyota hiace premio.jpg', desc: 'Eksekutif Van untuk tour mewah keluarga besar.' }
+        ];
+
+        let currentCategory = 'MPV';
+        let currentCarIndex = 0;
+        let filteredFleet = fleetData.filter(car => car.category === currentCategory);
+
+        const carDisplayContainer = document.getElementById('showcase-container');
+        const carDisplayImg = document.getElementById('showcase-car-img');
+        const carDisplayName = document.getElementById('showcase-car-name');
+        const carDisplayDesc = document.getElementById('showcase-car-desc');
+
+        function animateCarChange(callback) {
+            carDisplayContainer.classList.remove('car-showcase-enter');
+            void carDisplayContainer.offsetWidth; // trigger reflow
+            callback();
+            carDisplayContainer.classList.add('car-showcase-enter');
+        }
+
+        function updateShowcaseData() {
+            const car = filteredFleet[currentCarIndex];
+            carDisplayImg.src = car.img;
+            carDisplayName.textContent = car.name;
+            carDisplayDesc.textContent = car.desc;
+        }
+
+        function filterFleet(category, btnElement) {
+            currentCategory = category;
+            filteredFleet = fleetData.filter(car => car.category === category);
+            currentCarIndex = 0;
+            
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            
+            animateCarChange(updateShowcaseData);
+        }
+
+        function nextCar() {
+            currentCarIndex = (currentCarIndex + 1) % filteredFleet.length;
+            animateCarChange(updateShowcaseData);
+        }
+
+        function prevCar() {
+            currentCarIndex = (currentCarIndex - 1 + filteredFleet.length) % filteredFleet.length;
+            animateCarChange(updateShowcaseData);
         }
     </script>
 </body>

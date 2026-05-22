@@ -1,20 +1,15 @@
 <?php
-// Memulai session untuk mengambil data user yang sedang login
 session_start();
 
-// Mengecek apakah user sudah login
 if (!isset($_SESSION['email'])) {
-    // Jika belum login, baris di bawah ini akan memulangkan user ke halaman login di folder test
     header("Location: test/index.php");
     exit();
 }
 
-// Memanggil koneksi database
 include("test/connect.php"); 
 
 $nama_user = "Pelanggan"; // Default
 
-// Mengambil data user berdasarkan email yang tersimpan di session
 $email = $_SESSION['email'];
 $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email'");
 
@@ -42,16 +37,12 @@ if($row = mysqli_fetch_assoc($query)){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sewa Mobil Online No 1 di Indonesia - NusaRent</title>
     
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome CDN untuk Ikon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Font Roboto untuk menyamai gaya font Indoloka -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,700&display=swap" rel="stylesheet">
     
-    <!-- AOS CSS (Animasi Scroll) -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
@@ -71,7 +62,6 @@ if($row = mysqli_fetch_assoc($query)){
 
         select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 10px center; background-size: 1em; }
 
-        /* Hero Image Slider */
         .hero-slider { background-image: url('https://images.unsplash.com/photo-1549473889-14f410d83298?q=80&w=2000&auto=format&fit=crop'); background-size: cover; background-position: center 20%; height: 520px; position: relative; transition: background-image 0.6s ease-in-out; }
         .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0) 100%); }
         .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); color: white; font-size: 40px; cursor: pointer; text-shadow: 0 2px 6px rgba(0,0,0,0.6); opacity: 0.8; z-index: 30; transition: opacity 0.3s, transform 0.2s; }
@@ -81,9 +71,6 @@ if($row = mysqli_fetch_assoc($query)){
         .dot { width: 12px; height: 12px; background-color: rgba(255,255,255,0.5); border-radius: 50%; cursor: pointer; transition: background-color 0.3s; }
         .dot.active { background-color: white; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
 
-        /* =========================================================
-           TAMBAHAN EFEK ANIMASI SHOWCASE ARMADA
-           ========================================================= */
         .tab-btn {
             position: relative;
             transition: all 0.3s ease;
@@ -113,7 +100,6 @@ if($row = mysqli_fetch_assoc($query)){
 </head>
 <body class="antialiased" id="top">
 
-    <!-- NAVBAR TOP -->
     <nav class="bg-indoloka-blue border-indoloka-yellow text-white w-full fixed top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -127,9 +113,7 @@ if($row = mysqli_fetch_assoc($query)){
                     </div>
                     
                     <div class="hidden md:flex items-center space-x-6 pt-2" data-aos="fade-down" data-aos-delay="100">
-                        <!-- MENU BARU: HOME (Mengarah ke dashboard.php) -->
                         <a href="dashboard.php" class="text-sm font-medium hover:text-gray-200 transition">Home</a>
-                        
                         <a href="sewa_mobil.php" class="bg-blue-500/50 px-3 py-1 rounded text-sm font-medium hover:bg-blue-600 transition">Sewa Mobil</a>
                         <a href="hubungi_kami.php" class="text-sm font-medium hover:text-gray-200 transition">Hubungi Kami</a>
                         <div class="flex items-center space-x-3 text-lg border-l border-white/30 pl-4 ml-2">
@@ -160,8 +144,8 @@ if($row = mysqli_fetch_assoc($query)){
                         </div>
                         <div class="absolute hidden group-hover:block pt-3 w-36 right-0 z-50">
                             <div class="bg-white text-black rounded shadow-lg py-2 border border-gray-100">
-                                <a href="#" onclick="changeLanguage('id', 'IND', event)" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300"> Indonesia</a>
-                                <a href="#" onclick="changeLanguage('gb', 'ENG', event)" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/gb.png" alt="EN Flag" class="mr-2 h-3 border border-gray-300"> English</a>
+                                <a href="dashboard.php" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300"> Indonesia</a>
+                                <a href="dashboard_eng.php" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/gb.png" alt="EN Flag" class="mr-2 h-3 border border-gray-300"> English</a>
                             </div>
                         </div>
                     </div>
@@ -170,7 +154,6 @@ if($row = mysqli_fetch_assoc($query)){
         </div>
     </nav>
 
-    <!-- HERO SLIDER SECTION -->
     <section class="hero-slider mt-20" id="hero-slider">
         <div class="hero-overlay"></div>
         
@@ -186,7 +169,6 @@ if($row = mysqli_fetch_assoc($query)){
                     </div>
                     
                     <form action="sewa_mobil.php" method="GET">
-                        <!-- Lokasi Penjemputan -->
                         <div class="mb-3">
                             <label class="form-label">Lokasi Penjemputan</label>
                             <div class="input-group">
@@ -202,7 +184,6 @@ if($row = mysqli_fetch_assoc($query)){
                             </div>
                         </div>
 
-                        <!-- Jenis Mobil -->
                         <div class="mb-3">
                             <label class="form-label">Jenis Mobil Sewa</label>
                             <div class="input-group">
@@ -224,7 +205,6 @@ if($row = mysqli_fetch_assoc($query)){
                             </div>
                         </div>
 
-                        <!-- Tanggal & Lama Sewa -->
                         <div class="flex gap-2 mb-3">
                             <div class="w-1/2">
                                 <label class="form-label">Tanggal Sewa</label>
@@ -246,7 +226,6 @@ if($row = mysqli_fetch_assoc($query)){
                             </div>
                         </div>
 
-                        <!-- Jumlah Unit & Paket -->
                         <div class="flex gap-2 mb-4">
                             <div class="w-1/2">
                                 <label class="form-label">Jumlah Unit</label>
@@ -280,7 +259,6 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
             </div>
 
-            <!-- PROMO TEXT Kanan Tengah -->
             <div class="hidden md:flex absolute top-1/2 -translate-y-1/2 right-0 w-[55%] flex-col items-center justify-center text-white text-center z-20" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
                 <h2 id="promo-title" class="text-[3.5rem] font-bold drop-shadow-lg mb-1 transition-all duration-300">Bandung</h2>
                 <h3 id="promo-subtitle" class="text-2xl drop-shadow-md mb-6 transition-all duration-300">Rental Mobil Bandung</h3>
@@ -296,7 +274,6 @@ if($row = mysqli_fetch_assoc($query)){
         <div class="slider-dots" id="slider-dots-container"></div>
     </section>
 
-    <!-- KONTEN BAWAH (AYO JALAN - JALAN) -->
     <section class="py-12 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-lg font-bold text-gray-800 mb-6 uppercase border-b border-gray-300 pb-2 inline-block" data-aos="fade-up">AYO JALAN - JALAN KE KOTA MENARIK INI</h2>
@@ -335,17 +312,13 @@ if($row = mysqli_fetch_assoc($query)){
         </div>
     </section>
 
-    <!-- =========================================================================
-         SECTION BARU: SHOWCASE ARMADA INTERAKTIF DENGAN GAYA FORMAL TAPI MEWAH
-         ========================================================================= -->
     <section class="py-16 bg-gray-50 relative overflow-hidden border-y border-gray-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             
             <h2 class="text-xl font-bold text-gray-800 mb-2 uppercase" data-aos="fade-down">PILIHAN ARMADA TERBAIK KAMI</h2>
-            <!-- Garis khas indoloka diposisikan di tengah -->
+            
             <div class="w-24 h-[3px] bg-[#0076D6] mx-auto mb-8" data-aos="fade-up" data-aos-delay="100"></div>
 
-            <!-- TAB KATEGORI KENDARAAN (Elegan) -->
             <div class="flex flex-wrap justify-center gap-4 md:gap-8 mt-6" data-aos="fade-up" data-aos-delay="200">
                 <button onclick="filterFleet('MPV', this)" class="tab-btn active px-4 py-2 text-gray-500 text-lg uppercase tracking-wide cursor-pointer focus:outline-none hover:text-[#0076D6]">MPV</button>
                 <button onclick="filterFleet('SUV', this)" class="tab-btn px-4 py-2 text-gray-500 text-lg uppercase tracking-wide cursor-pointer focus:outline-none hover:text-[#0076D6]">SUV</button>
@@ -353,23 +326,18 @@ if($row = mysqli_fetch_assoc($query)){
                 <button onclick="filterFleet('Niaga', this)" class="tab-btn px-4 py-2 text-gray-500 text-lg uppercase tracking-wide cursor-pointer focus:outline-none hover:text-[#0076D6]">Niaga</button>
             </div>
 
-            <!-- STAGE PANGGUNG 3D -->
             <div class="mt-12 relative w-full max-w-4xl mx-auto" data-aos="zoom-in" data-aos-delay="300" data-aos-duration="1200">
                 
-                <!-- Lantai Panggung 3D (Refleksi Transparan) -->
                 <div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-3/4 h-32 stage-floor -z-10"></div>
                 
                 <div class="flex items-center justify-between">
-                    <!-- Tombol Panah Kiri -->
                     <button onclick="prevCar()" class="w-12 h-12 bg-white text-[#0076D6] rounded-full shadow-lg hover:bg-[#0076D6] hover:text-white transition-all duration-300 z-20 flex items-center justify-center text-xl border border-gray-100 transform hover:scale-110 hover:-translate-x-2">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
                     
-                    <!-- Panggung Tampil Mobil -->
                     <div class="flex-1 px-4 relative h-[360px] flex flex-col items-center justify-center">
                         <div id="showcase-container" class="w-full flex flex-col items-center">
-                            <!-- Drop-shadow memberikan efek mobil memiliki bayangan di lantai -->
-                            <img id="showcase-car-img" src="gambar/toyota all new avanza.jpg" alt="Mobil" class="max-h-[200px] object-contain drop-shadow-2xl transition-transform hover:scale-[1.15] duration-500">
+                            <img id="showcase-car-img" src="gambar/toyota all new avanza.jpg" alt="Mobil" class="max-h-[200px] object-contain drop-shadow-2xl transition-transform hover:scale-[1.15] duration-500 mix-blend-multiply">
                             
                             <div class="mt-10">
                                 <h3 id="showcase-car-name" class="text-3xl font-bold text-gray-800 tracking-tight">Toyota All New Avanza</h3>
@@ -378,13 +346,11 @@ if($row = mysqli_fetch_assoc($query)){
                         </div>
                     </div>
 
-                    <!-- Tombol Panah Kanan -->
                     <button onclick="nextCar()" class="w-12 h-12 bg-white text-[#0076D6] rounded-full shadow-lg hover:bg-[#0076D6] hover:text-white transition-all duration-300 z-20 flex items-center justify-center text-xl border border-gray-100 transform hover:scale-110 hover:translate-x-2">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
                 </div>
 
-                <!-- Tombol Action -->
                 <div class="mt-4 relative z-30" data-aos="fade-up" data-aos-delay="400">
                     <a href="sewa_mobil.php" class="inline-flex items-center gap-2 btn-indoloka-blue text-white px-8 py-3 rounded text-lg font-bold shadow-md hover:bg-blue-700 transition transform hover:-translate-y-1">
                         <i class="fa-solid fa-car"></i> PESAN KENDARAAN INI 
@@ -394,7 +360,6 @@ if($row = mysqli_fetch_assoc($query)){
         </div>
     </section>
 
-    <!-- MENGAPA SEWA MOBIL SECTION -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12" data-aos="fade-in">
         <div class="flex h-1.5 w-full mb-8"><div class="w-1/3 bg-[#1ba0e2]"></div><div class="w-1/3 bg-[#ffb400]"></div><div class="w-1/3 bg-[#ff4b00]"></div></div>
     </div>
@@ -404,7 +369,6 @@ if($row = mysqli_fetch_assoc($query)){
             <h2 class="text-xl font-bold text-gray-900 mb-8 uppercase text-left" data-aos="fade-right">MENGAPA SEWA MOBIL DI NUSARENT.COM?</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Fitur -->
                 <div class="border border-gray-200 p-6 flex flex-col items-center text-center bg-white hover:shadow-xl hover:-translate-y-2 transition duration-300" data-aos="fade-up" data-aos-delay="0">
                     <div class="w-[100px] h-[100px] rounded-full bg-[#1ba0e2] flex items-center justify-center text-white mb-5 relative hover:scale-110 transition duration-300">
                         <i class="fa-solid fa-car text-5xl"></i>
@@ -437,7 +401,6 @@ if($row = mysqli_fetch_assoc($query)){
         </div>
     </section>
 
-    <!-- Footer Simple -->
     <footer class="bg-[#1a2b4c] text-gray-300 py-10 mt-10 border-t border-gray-200">
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h3 class="text-white text-xl font-bold mb-4"><i class="fa-solid fa-car-side"></i> NusaRent</h3>
@@ -446,20 +409,15 @@ if($row = mysqli_fetch_assoc($query)){
         </div>
     </footer>
 
-    <!-- TOMBOL SCROLL TO TOP -->
     <a href="#top" class="fixed bottom-6 right-6 bg-[#444444] text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg hover:bg-gray-800 transition z-50 hover:-translate-y-1">
         <i class="fa-solid fa-chevron-up text-xl"></i>
     </a>
 
-    <!-- SCRIPT AOS ANIMASI -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- JAVASCRIPT UNTUK ANIMASI SLIDER, INIT AOS & BAHASA -->
     <script>
-        // Inisialisasi AOS (Animasi Scroll)
         AOS.init({ once: true, offset: 50 });
 
-        // Data untuk masing-masing slide 
         const slides = [
             { image: "url('https://images.unsplash.com/photo-1549473889-14f410d83298?q=80&w=2000&auto=format&fit=crop')", title: "Bandung", subtitle: "Rental Mobil Bandung", location: "Lokasi : Jembatan Pasupati" },
             { image: "url('gambar/jakarta.jpg')", title: "Jakarta", subtitle: "Rental Mobil Jakarta", location: "Lokasi : Monumen Nasional" },
@@ -517,19 +475,9 @@ if($row = mysqli_fetch_assoc($query)){
         setInterval(nextSlide, 5000);
         setupDots();
 
-        // FUNGSI BAHASA
         function changeLanguage(flagCode, langText, event) {
-            event.preventDefault();
-            document.getElementById('current-flag').src = `https://flagcdn.com/w20/${flagCode}.png`;
-            document.getElementById('current-lang').innerText = langText;
-            const trigger = document.getElementById('lang-trigger');
-            trigger.parentElement.classList.remove('group');
-            setTimeout(() => { trigger.parentElement.classList.add('group'); }, 100);
+           
         }
-
-        // ==========================================================
-        // FUNGSI LOGIKA GALERI ARMADA KAMI (INTERAKTIF SHOWCASE)
-        // ==========================================================
         const fleetData = [
             // Kategori MPV
             { category: 'MPV', name: 'Toyota All New Avanza', img: 'gambar/toyota all new avanza.jpg', desc: 'Mobil keluarga andalan dengan efisiensi tinggi.' },
@@ -542,12 +490,12 @@ if($row = mysqli_fetch_assoc($query)){
             { category: 'SUV', name: 'Toyota Raize', img: 'gambar/toyota raize.jpg', desc: 'Compact SUV yang lincah untuk kaum urban.' },
             { category: 'SUV', name: 'Mitsubishi Pajero Sport', img: 'gambar/mitshubishi pajero.jpg', desc: 'Performa mesin buas, mewah & maskulin.' },
             
-            // Kategori Luxury (Zenix dimasukkan kesini juga sebagai opsi Premium)
+           
             { category: 'Luxury', name: 'Toyota Alphard', img: 'gambar/toyota alphard.jpg', desc: 'Simbol kesuksesan dengan kenyamanan VIP.' },
             { category: 'Luxury', name: 'Toyota Innova Reborn', img: 'gambar/toyota innova reborn.jpg', desc: 'Kenyamanan ekstra legendaris untuk perjalanan jauh.' },
             { category: 'Luxury', name: 'Toyota Innova Zenix Hybrid', img: 'gambar/toyota zenix.jpg', desc: 'Teknologi hybrid masa depan, ramah lingkungan.' },
             
-            // Kategori Niaga
+            
             { category: 'Niaga', name: 'Toyota Hiace Commuter', img: 'gambar/toyota hiace.jpg', desc: 'Kapasitas maksimal untuk rombongan wisata.' },
             { category: 'Niaga', name: 'Toyota Hiace Premio', img: 'gambar/toyota hiace premio.jpg', desc: 'Eksekutif Van untuk tour mewah keluarga besar.' }
         ];

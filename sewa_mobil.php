@@ -77,15 +77,14 @@ if($row = mysqli_fetch_assoc($query)){
     <nav class="bg-indoloka-blue border-indoloka-yellow text-white w-full fixed top-0 z-50 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                
                 <div class="flex items-center space-x-8">
                     <!-- Logo diarahkan kembali ke dashboard.php -->
-                    <div class="flex flex-col cursor-pointer" onclick="window.location.href='dashboard.php'">
+                    <a href="dashboard.php" class="flex flex-col cursor-pointer hover:opacity-90 transition">
                         <div class="flex items-center text-3xl font-bold tracking-tight">
                             <i class="fa-solid fa-car-side mr-2"></i> NusaRent<span class="text-sm font-normal pt-2">.com</span>
                         </div>
                         <span class="text-xs font-medium tracking-wide">Sewa Mobil Online No 1 di Indonesia</span>
-                    </div>
+                    </a>
                     
                     <div class="hidden md:flex items-center space-x-6 pt-2">
                         <!-- MENU BARU: HOME (Mengarah ke dashboard.php) -->
@@ -122,8 +121,9 @@ if($row = mysqli_fetch_assoc($query)){
                         </div>
                         <div class="absolute hidden group-hover:block pt-3 w-36 right-0 z-50">
                             <div class="bg-white text-black rounded shadow-lg py-2 border border-gray-100">
-                                <a href="#" onclick="changeLanguage('id', 'IND', event)" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300"> Indonesia</a>
-                                <a href="#" onclick="changeLanguage('gb', 'ENG', event)" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/gb.png" alt="EN Flag" class="mr-2 h-3 border border-gray-300"> English</a>
+                                <!-- DIUBAH: Menggunakan href murni tanpa javascript onlick -->
+                                <a href="sewa_mobil.php" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300"> Indonesia</a>
+                                <a href="sewa_mobil_eng.php" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/gb.png" alt="EN Flag" class="mr-2 h-3 border border-gray-300"> English</a>
                             </div>
                         </div>
                     </div>
@@ -257,7 +257,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 1: Avanza -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota all new avanza.jpg" alt="Toyota Avanza" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/toyota all new avanza.jpg" alt="Toyota Avanza" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Toyota All New Avanza</h3>
@@ -286,7 +286,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 2: Xpander -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="100">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/mitshubishi xpander.jpg" alt="Mitsubishi Xpander" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/mitshubishi xpander.jpg" alt="Mitsubishi Xpander" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Mitsubishi Xpander</h3>
@@ -312,7 +312,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 3: Innova Reborn -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota innova reborn.jpg" alt="Toyota Innova Reborn" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/toyota innova reborn.jpg" alt="Toyota Innova Reborn" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Toyota Innova Reborn</h3>
@@ -338,7 +338,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 4: Alphard -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota alphard.jpg" alt="Toyota Alphard" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/toyota alphard.jpg" alt="Toyota Alphard" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Toyota Alphard</h3>
@@ -363,7 +363,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 5: Hiace -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota hiace.jpg" alt="Toyota Hiace" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/toyota hiace.jpg" alt="Toyota Hiace" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Toyota Hiace Commuter</h3>
@@ -388,7 +388,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 6: Hiace Premio -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota hiace premio.jpg" alt="Toyota Hiace Premio" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/toyota hiace premio.jpg" alt="Toyota Hiace Premio" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Toyota Hiace Premio</h3>
@@ -413,7 +413,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 7: Pajero Sport -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/mitshubishi pajero.jpg" alt="Mitsubishi Pajero Sport" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/mitshubishi pajero.jpg" alt="Mitsubishi Pajero Sport" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Mitsubishi Pajero Sport</h3>
@@ -438,7 +438,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 8: Daihatsu Xenia -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/daihatsu all newxenia.jpg" alt="Daihatsu All New Xenia" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/daihatsu all newxenia.jpg" alt="Daihatsu All New Xenia" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Daihatsu All New Xenia</h3>
@@ -463,7 +463,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 9: Toyota Raize -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota raize.jpg" alt="Toyota Raize" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/toyota raize.jpg" alt="Toyota Raize" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Toyota Raize</h3>
@@ -488,7 +488,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 10: Toyota Rush -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota rush.jpg" alt="Toyota Rush" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/toyota rush.jpg" alt="Toyota Rush" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Toyota Rush GR Sport</h3>
@@ -512,7 +512,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 11: Toyota Veloz -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota veloz.jpg" alt="Toyota Veloz" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/toyota veloz.jpg" alt="Toyota Veloz" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Toyota All New Veloz</h3>
@@ -537,7 +537,7 @@ if($row = mysqli_fetch_assoc($query)){
             <!-- List Mobil 12: Toyota Zenix -->
             <div class="bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row gap-6 mb-6 shadow-sm hover:shadow-lg transition duration-300" data-aos="fade-up">
                 <div class="w-full md:w-1/4 flex items-center justify-center p-4">
-                    <img src="gambar/toyota zenix.jpg" alt="Toyota Innova Zenix" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500">
+                    <img src="gambar/toyota zenix.jpg" alt="Toyota Innova Zenix" class="w-full h-auto object-contain transform hover:scale-110 transition duration-500 mix-blend-multiply">
                 </div>
                 <div class="w-full md:w-1/2 flex flex-col justify-center">
                     <h3 class="text-2xl font-bold text-gray-800">Toyota Innova Zenix Hybrid</h3>
@@ -584,16 +584,8 @@ if($row = mysqli_fetch_assoc($query)){
         // Inisialisasi AOS (Animasi Scroll)
         AOS.init({ once: true, offset: 50 });
 
-        // Fungsi Mengubah Bahasa
-        function changeLanguage(flagCode, langText, event) {
-            event.preventDefault();
-            document.getElementById('current-flag').src = `https://flagcdn.com/w20/${flagCode}.png`;
-            document.getElementById('current-lang').innerText = langText;
-            
-            const trigger = document.getElementById('lang-trigger');
-            trigger.parentElement.classList.remove('group');
-            setTimeout(() => { trigger.parentElement.classList.add('group'); }, 100);
-        }
+        // Fungsi Mengubah Bahasa dihapus (Dikosongkan) karena sekarang pakai href langsung
+        function changeLanguage() {}
     </script>
 </body>
 </html>

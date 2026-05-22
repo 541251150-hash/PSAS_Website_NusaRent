@@ -159,8 +159,9 @@ if($row = mysqli_fetch_assoc($query)){
                         </div>
                         <div class="absolute hidden group-hover:block pt-3 w-36 right-0 z-50">
                             <div class="bg-white text-black rounded shadow-lg py-2 border border-gray-100">
-                                <a href="#" onclick="changeLanguage('id', 'IND', event)" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300"> Indonesia</a>
-                                <a href="#" onclick="changeLanguage('gb', 'ENG', event)" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/gb.png" alt="EN Flag" class="mr-2 h-3 border border-gray-300"> English</a>
+                                <!-- DIUBAH: Menggunakan href murni tanpa javascript -->
+                                <a href="hubungi_kami.php" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/id.png" alt="ID Flag" class="mr-2 h-3 border border-gray-300"> Indonesia</a>
+                                <a href="hubungi_kami_eng.php" class="flex items-center px-4 py-2 hover:bg-blue-50 font-semibold transition"><img src="https://flagcdn.com/w20/gb.png" alt="EN Flag" class="mr-2 h-3 border border-gray-300"> English</a>
                             </div>
                         </div>
                     </div>
@@ -186,7 +187,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">Layanan Call Center</h3>
                 <p class="text-gray-500 text-sm mb-3">Tersedia 24 Jam setiap hari</p>
-                <p class="text-2xl font-bold text-indoloka-blue">0881-1336-160</p>
+                <p class="text-2xl font-bold text-indoloka-blue">021 - 8080 - 9999</p>
             </div>
             
             <div class="contact-card text-center" data-aos="fade-up" data-aos-delay="100">
@@ -195,7 +196,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">WhatsApp Resmi</h3>
                 <p class="text-gray-500 text-sm mb-3">Chat cepat untuk reservasi</p>
-                <p class="text-2xl font-bold text-green-600">0817-7001-3416</p>
+                <p class="text-2xl font-bold text-green-600">0812-3344-5566</p>
             </div>
 
             <div class="contact-card text-center" data-aos="fade-up" data-aos-delay="200">
@@ -204,7 +205,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">Email Bantuan</h3>
                 <p class="text-gray-500 text-sm mb-3">Untuk kerjasama & keluhan</p>
-                <p class="text-lg font-bold text-gray-800">irvantrans14@gmail.com</p>
+                <p class="text-lg font-bold text-gray-800">cs@nusarent.com</p>
             </div>
         </div>
     </section>
@@ -297,8 +298,6 @@ if($row = mysqli_fetch_assoc($query)){
         <div class="max-w-7xl mx-auto px-4 text-center">
             <h2 class="text-xl font-bold text-gray-800 mb-6 uppercase">Ikuti Berita & Promo di Sosial Media Kami</h2>
             <div class="flex justify-center gap-6">
-                <!-- Facebook dihapus sesuai permintaan sebelumnya, tapi karena ini seksi social media khusus saya biarkan saja WhatsApp yang utama. 
-                     Atau bisa diganti WhatsApp dan Instagram saja agar konsisten dengan header -->
                 <a href="#" class="w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center text-3xl shadow hover:-translate-y-2 transition duration-300" title="WhatsApp">
                     <i class="fa-brands fa-whatsapp"></i>
                 </a>
@@ -333,16 +332,9 @@ if($row = mysqli_fetch_assoc($query)){
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ once: true, offset: 50 });
-
-        // FUNGSI BAHASA
-        function changeLanguage(flagCode, langText, event) {
-            event.preventDefault();
-            document.getElementById('current-flag').src = `https://flagcdn.com/w20/${flagCode}.png`;
-            document.getElementById('current-lang').innerText = langText;
-            const trigger = document.getElementById('lang-trigger');
-            trigger.parentElement.classList.remove('group');
-            setTimeout(() => { trigger.parentElement.classList.add('group'); }, 100);
-        }
+        
+        // FUNGSI BAHASA (Sudah dikosongkan karena menggunakan link langsung)
+        function changeLanguage() { }
     </script>
 </body>
 </html>

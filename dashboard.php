@@ -176,6 +176,7 @@ if($row = mysqli_fetch_assoc($query)){
                                 <select name="lokasi">
                                     <option value="bandung">BANDUNG</option>
                                     <option value="jakarta">JAKARTA</option>
+                                    <option value="tangerang">TANGERANG</option>
                                     <option value="bali">BALI</option>
                                     <option value="malang">MALANG</option>
                                     <option value="yogyakarta">YOGYAKARTA</option>
@@ -221,6 +222,9 @@ if($row = mysqli_fetch_assoc($query)){
                                         <option value="1">1 Hari</option>
                                         <option value="2">2 Hari</option>
                                         <option value="3">3 Hari</option>
+                                        <option value="4">4 Hari</option>
+                                        <option value="5">5 Hari</option>
+                                        <option value="6">6 Hari</option>
                                     </select>
                                 </div>
                             </div>
@@ -235,6 +239,9 @@ if($row = mysqli_fetch_assoc($query)){
                                         <option value="1">1 Unit</option>
                                         <option value="2">2 Unit</option>
                                         <option value="3">3 Unit</option>
+                                        <option value="4">4 Unit</option>
+                                        <option value="5">5 Unit</option>
+                                        <option value="6">6 Unit</option>
                                     </select>
                                 </div>
                             </div>

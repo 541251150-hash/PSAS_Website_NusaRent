@@ -58,7 +58,7 @@ if($row = mysqli_fetch_assoc($query)){
         body { font-family: 'Roboto', Arial, sans-serif; background-color: #ffffff; scroll-behavior: smooth; overflow-x: hidden; }
         .bg-indoloka-blue { background-color: #0076D6; }
         .btn-indoloka-blue { background-color: #006BFE; }
-        .border-indoloka-yellow { border-bottom: 4px solid #FFC107; }
+        
 
         /* Search Form */
         .search-box-glass { background-color: rgba(255, 255, 255, 0.85); padding: 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; }

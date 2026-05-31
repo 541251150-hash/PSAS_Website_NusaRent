@@ -1,15 +1,18 @@
-<?php
+?php
+// Memulai session untuk mendeteksi status login dari database
 session_start();
-include("koneksi.php"); // Pastikan nama file koneksi sudah benar (connect.php atau koneksi.php)
 
-// Cek apakah user sudah login, jika belum lempar ke login
+// Cek apakah user sudah login, jika belum kembalikan ke halaman login (index.php di dalam folder test)
 if(!isset($_SESSION['email'])){
     header("Location: index.php");
     exit();
+} else {
+    // JIKA BERHASIL LOGIN: Lempar langsung ke dashboard utama di luar folder test
+    header("Location: ../dashboard.php");
+    exit();
 }
 ?>
-
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="id">
 <head>
     <meta charset="UTF-8">

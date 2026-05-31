@@ -186,7 +186,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">Call Center Service</h3>
                 <p class="text-gray-500 text-sm mb-3">Available 24/7 every day</p>
-                <p class="text-2xl font-bold text-indoloka-blue">021 - 8080 - 9999</p>
+                <p class="text-2xl font-bold text-indoloka-blue">0881-1336-160</p>
             </div>
             
             <div class="contact-card text-center" data-aos="fade-up" data-aos-delay="100">
@@ -195,7 +195,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">Official WhatsApp</h3>
                 <p class="text-gray-500 text-sm mb-3">Quick chat for reservations</p>
-                <p class="text-2xl font-bold text-green-600">0812-3344-5566</p>
+                <p class="text-2xl font-bold text-green-600">0817-7001-3416
             </div>
 
             <div class="contact-card text-center" data-aos="fade-up" data-aos-delay="200">
@@ -204,7 +204,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">Support Email</h3>
                 <p class="text-gray-500 text-sm mb-3">For partnerships & complaints</p>
-                <p class="text-lg font-bold text-gray-800">cs@nusarent.com</p>
+                <p class="text-lg font-bold text-gray-800">irvantrans14@gmail.com
             </div>
         </div>
     </section>

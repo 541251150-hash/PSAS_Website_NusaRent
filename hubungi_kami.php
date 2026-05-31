@@ -196,7 +196,7 @@ if($row = mysqli_fetch_assoc($query)){
                 </div>
                 <h3 class="text-xl font-bold text-gray-800 mb-2">WhatsApp Resmi</h3>
                 <p class="text-gray-500 text-sm mb-3">Chat cepat untuk reservasi</p>
-                <p class="text-2xl font-bold text-green-600">0817-7001-3416/p>
+                <p class="text-2xl font-bold text-green-600">0817-7001-3416
             </div>
 
             <div class="contact-card text-center" data-aos="fade-up" data-aos-delay="200">
